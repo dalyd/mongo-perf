@@ -2,45 +2,60 @@ if ( typeof(tests) != "object" ) {
     tests = [];
 }
 
-tests.push( { name : "Filted_Index.v1.filter-used",
+var setupTest = function (collection) {
+    collection.drop();
+    for ( var i = 0; i < 4800; i++ ) {
+        collection.insert( { x : i, a : i } );
+    }
+    collection.getDB().getLastError();
+ 
+}
+
+var setupTestFiltered = function (collection) {
+    setupTest(collection);
+    collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 500 } } } );
+    collection.getDB().getLastError();
+}
+var setupTestIndexed = function (collection) {
+    setupTest(collection);
+    collection.ensureIndex( { x : 1 });
+    collection.getDB().getLastError();
+}
+
+tests.push( { name : "Filtered_Index.v1.filter-used",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestFiltered(collection);
               },
 
               ops : [
-                  { op: "find", query:  { x : {"#RAND_INT" : [ 4000 , 4800 ] } } }
+                  { op: "find", query:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filted_Index.v1.filter-unused",
+tests.push( { name : "Filtered_Index.v1.index-used-nofilter",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestIndexed(collection);
               },
 
               ops : [
-                  { op: "find", query:  { x : { "#RAND_INT" : [ 0, 4000] } } } 
+                  { op: "find", query:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filted_Index.v1.filter-mixuse",
+tests.push( { name : "Filtered_Index.v1.filter-unused",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestFiltered(collection);
+              },
+
+              ops : [
+                  { op: "find", query:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {$gte : 500  } } }
+              ] } );
+
+tests.push( { name : "Filtered_Index.v1.filter-mixuse",
+              tags: ['monthly'],
+              pre: function( collection ) {
+                  setupTestFiltered(collection);
               },
 
               ops : [
@@ -48,47 +63,32 @@ tests.push( { name : "Filted_Index.v1.filter-mixuse",
               ] } );
 
 
-tests.push( { name : "Filted_Index.v1.filter-used.gte",
+tests.push( { name : "Filtered_Index.v1.filter-used.lte",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestFiltered(collection);
               },
 
               ops : [
-                  { op: "find", query:  { x : {$gte : { "#RAND_INT" : [ 4000 , 4800 ] } } } }
+                  { op: "find", query:  { x : {$lte : {"#RAND_INT" : [ 0, 500 ]}}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filted_Index.v1.filter-unused.gte",
+tests.push( { name : "Filtered_Index.v1.filter-unused.lte",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestFiltered(collection);
               },
 
               ops : [
-                  { op: "find", query:  { x : {$gte : { "#RAND_INT" : [ 0, 4000] } } } }
+                  { op: "find", query:  { x : {$lte : {"#RAND_INT" : [ 500, 4800 ]}}, a : {$gte : 500  } } }
               ] } );
 
-tests.push( { name : "Filted_Index.v1.filter-mixuse.gte",
+tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
               tags: ['monthly'],
               pre: function( collection ) {
-                  collection.drop();
-                  collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4000 } } } );
-                  for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { x : i, a : i } );
-                  }
-                  collection.getDB().getLastError();
+                  setupTestFiltered(collection);
               },
 
               ops : [
-                  { op: "find", query:  { x : {$gte : { "#RAND_INT" : [ 0 , 4800 ] } } } }
+                  { op: "find", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] } } } }
               ] } );

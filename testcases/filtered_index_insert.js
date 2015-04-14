@@ -25,7 +25,7 @@ var setupTestIndexed = function (collection) {
 }
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -35,7 +35,7 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -45,7 +45,7 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -54,9 +54,9 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
                   { op: "insert", doc:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : { "#RAND_INT" : [ 0 , 4800 ] } } }
               ] } );
 
-
+// Compare to filtered index. Should be the same
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -65,8 +65,9 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
                   { op: "insert", doc:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {"#RAND_INT" : [ 0, 500 ]} } }
               ] } );
 
+// Compare to general and non-selective index. Expect this to be faster since it's not updating the index
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-unused",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -76,7 +77,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -87,7 +88,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
 
 
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -97,7 +98,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-unused",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -107,7 +108,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -118,7 +119,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
 
 
 tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-used",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTest(collection);
               },
@@ -128,7 +129,7 @@ tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-used",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-unused",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTest(collection);
               },
@@ -138,7 +139,7 @@ tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-mixuse",
-              tags: ['monthly'],
+              tags: ['insert','monthly'],
               pre: function( collection ) {
                   setupTest(collection);
               },

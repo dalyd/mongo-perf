@@ -30,11 +30,39 @@ tests.push( { name: "Commands.sleep.10ms.local",
                   { op: "sleepMicros", micros : NumberLong(10000) }
               ] } );
 
+// Sleeps for 1 ms on server
+tests.push( { name: "Commands.sleep.1ms.server",
+              tags: ['skip','baseline'],
+              ops: [
+                  {op : "command", command : {"sleepmicros" : 1, micros : NumberLong(1000)}, ns : "test.test"}
+              ] } );
+
+// Sleeps for 10 ms on server
+tests.push( { name: "Commands.sleep.10ms.local",
+              tags: ['skip','baseline'],
+              ops: [
+                  {op : "command", command : {"sleepmicros" : 1, micros : NumberLong(10000)}, ns : "test.test"}
+              ] } );
+
 // This does not contact server. Copies a value in benchrun loop
 tests.push( { name: "Commands.let",
               tags: ['skip','baseline'],
               ops: [
                   { op: "let", target: "x", value : 1 }
+              ] } );
+
+// This does not contact server. Copies a random value in benchrun loop
+tests.push( { name: "Commands.let.randint",
+              tags: ['skip','baseline'],
+              ops: [
+                  { op: "let", target: "x", value : {"#RAND_INT_PLUS_THREAD": [0,100]} }
+              ] } );
+
+// This does not contact server. Copies a random value in benchrun loop
+tests.push( { name: "Commands.let.randstring",
+              tags: ['skip','baseline'],
+              ops: [
+                  { op: "let", target: "x", value : {"#RAND_STRING": [10]} }
               ] } );
 
 // This contacts the server and does a noop on the server

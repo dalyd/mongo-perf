@@ -163,7 +163,8 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, writeOptio
         result["getmore"] +
         result["command"];
 
-    print("\t" + thread + "\t" + total);
+    print("Ori\t" + thread + "\t" + total);
+    print("Ops\t" + thread + "\t" + result["TotalOps/s"]);
 
     if ("post" in test) {
         for (var i = 0; i < multidb; i++) {

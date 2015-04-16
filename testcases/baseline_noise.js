@@ -74,6 +74,22 @@ tests.push( { name: "Commands.noop",
                     command : { noop : 1}}
               ] } );
 // This contacts the server and does a noop on the server
+tests.push( { name: "Commands.cpuload",
+              tags: ['skip', 'baseline'],
+              ops: [
+                  { op: "command", 
+                    ns : "#B_DB",
+                    command : { cpuload : 1}}
+              ] } );
+// This contacts the server and does a noop on the server
+tests.push( { name: "Commands.cpuloadx100",
+              tags: ['skip', 'baseline'],
+              ops: [
+                  { op: "command", 
+                    ns : "#B_DB",
+                    command : { cpuload : 1, factor: 100}}
+              ] } );
+// This contacts the server and does a noop on the server
 tests.push( { name: "Commands.ping",
               tags: ['skip', 'baseline'],
               ops: [

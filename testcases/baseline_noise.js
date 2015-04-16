@@ -18,28 +18,28 @@ tests.push( { name: "Commands.nop",
 
 // This does not contact the server. Sleeps for 1 ms 
 tests.push( { name: "Commands.sleep.1ms.local",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline','sleep'],
               ops: [
                   { op: "sleepMicros", micros : NumberLong(1000) }
               ] } );
 
 // This does not contact the server. Sleeps for 10 ms 
 tests.push( { name: "Commands.sleep.10ms.local",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline','sleep'],
               ops: [
                   { op: "sleepMicros", micros : NumberLong(10000) }
               ] } );
 
 // Sleeps for 1 ms on server
 tests.push( { name: "Commands.sleep.1ms.server",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline','sleep'],
               ops: [
                   {op : "command", ns : "admin", command : {"sleepmicros" : 1, micros : NumberLong(1000)}}
               ] } );
 
 // Sleeps for 10 ms on server
-tests.push( { name: "Commands.sleep.10ms.local",
-              tags: ['skip','baseline'],
+tests.push( { name: "Commands.sleep.10ms.server",
+              tags: ['skip','baseline','sleep'],
               ops: [
                   {op : "command", ns : "#B_DB", command : {"sleepmicros" : 1, micros : NumberLong(10000)}}
               ] } );

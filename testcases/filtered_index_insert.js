@@ -8,20 +8,17 @@ var setupTest = function (collection) {
 
 var setupTestFiltered = function (collection) {
     setupTest(collection);
-    collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 500 } } } );
-    collection.getDB().getLastError();
+    collection.createIndex( { x : 1 }, { filter : { a : { $lt : 500 } } } );
 }
 
 var setupTestFilteredNonSelective = function (collection) {
     setupTest(collection);
-    collection.ensureIndex( { x : 1 }, { filter : { a : { $lt : 4800 } } } );
-    collection.getDB().getLastError();
+    collection.createIndex( { x : 1 }, { filter : { a : { $lt : 4800 } } } );
 }
 
 var setupTestIndexed = function (collection) {
     setupTest(collection);
-    collection.ensureIndex( { x : 1 });
-    collection.getDB().getLastError();
+    collection.createIndex( { x : 1 });
 }
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
@@ -65,17 +62,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
                   { op: "insert", doc:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {"#RAND_INT" : [ 0, 500 ]} } }
               ] } );
 
-// Compare to general and non-selective index. Expect this to be faster since it's not updating the index
-tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-unused",
-              tags: ['insert','monthly'],
-              pre: function( collection ) {
-                  setupTestFilteredNonSelective(collection);
-              },
-
-              ops : [
-                  { op: "insert", doc:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {"#RAND_INT" : [ 500, 4800 ]} } }
-              ] } );
-
+// compare to general index
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
               tags: ['insert','monthly'],
               pre: function( collection ) {
@@ -86,7 +73,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
                   { op: "insert", doc:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : { "#RAND_INT" : [ 0 , 4800 ] } } }
               ] } );
 
-
+// compare to filtered index, filtered used
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
               tags: ['insert','monthly'],
               pre: function( collection ) {
@@ -97,16 +84,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
                   { op: "insert", doc:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {"#RAND_INT" : [ 0, 500 ]} } }
               ] } );
 
-tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-unused",
-              tags: ['insert','monthly'],
-              pre: function( collection ) {
-                  setupTestIndexed(collection);
-              },
-
-              ops : [
-                  { op: "insert", doc:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {"#RAND_INT" : [ 500, 4800 ]} } }
-              ] } );
-
+// compare to filtered index -- non-selective
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
               tags: ['insert','monthly'],
               pre: function( collection ) {
@@ -117,35 +95,5 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
                   { op: "insert", doc:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : { "#RAND_INT" : [ 0 , 4800 ] } } }
               ] } );
 
-
-tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-used",
-              tags: ['insert','monthly'],
-              pre: function( collection ) {
-                  setupTest(collection);
-              },
-
-              ops : [
-                  { op: "insert", doc:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {"#RAND_INT" : [ 0, 500 ]} } }
-              ] } );
-
-tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-unused",
-              tags: ['insert','monthly'],
-              pre: function( collection ) {
-                  setupTest(collection);
-              },
-
-              ops : [
-                  { op: "insert", doc:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {"#RAND_INT" : [ 500, 4800 ]} } }
-              ] } );
-
-tests.push( { name : "Filtered_Index_Insert.not-indexed.v1.filter-mixuse",
-              tags: ['insert','monthly'],
-              pre: function( collection ) {
-                  setupTest(collection);
-              },
-
-              ops : [
-                  { op: "insert", doc:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : { "#RAND_INT" : [ 0 , 4800 ] } } }
-              ] } );
 
 

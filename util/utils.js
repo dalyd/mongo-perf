@@ -162,9 +162,13 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, writeOptio
         result["delete"] +
         result["getmore"] +
         result["command"];
+    
+    error_string = "";
+    if (result["errCount"] != 0)
+        error_string = "There were errors: " + result["errCount"];
 
-    print("Ori\t" + thread + "\t" + total);
-    print("Ops\t" + thread + "\t" + result["TotalOps/s"]);
+    print("Ori\t" + thread + "\t" + total + "\t" + error_string);
+    print("Ops\t" + thread + "\t" + result["TotalOps/s"] + "\t" + error_string);
 
     if ("post" in test) {
         for (var i = 0; i < multidb; i++) {

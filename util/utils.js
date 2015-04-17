@@ -185,7 +185,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, writeOptio
         }
     }
 
-    return { ops_per_sec: total };
+    return { ops_per_sec: total, tops_per_sec : result["TotalOps/s"], error_count : result["errCount"]};
 }
 
 function medianCompare(x, y) {
@@ -419,7 +419,9 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
             print(test.name);
 
             var threadResults = {};
+            var threadNewResults = {};
             threadResults['run_start_time'] = new Date();
+            threadNewResults['run_start_time'] = new Date();
             for (var t = 0; t < threadCounts.length; t++) {
                 var threadCount = threadCounts[t];
                 var results = [];
@@ -448,12 +450,30 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 newResults.run_end_time = new Date();
                 newResults.n = trials;
                 newResults.elapsed_secs = seconds;  // TODO: update mongo shell to return actual elapsed time
+                values = [];
+                for (var j = 0; j < trials; j++) {
+                    values[j] = results[j].error_count;
+                }
+                newResults.errors = values;
                 threadResults[threadCount] = newResults;
+                var newResults = {};
+                values = [];
+                for (var j = 0; j < trials; j++) {
+                    values[j] = results[j].tops_per_sec;
+                }
+                newResults.ops_per_sec = getMean(values);
+                newResults.median = getMedian(values);
+                newResults.standardDeviation = Math.sqrt(getVariance(values));
+                newResults.run_end_time = new Date();
+                newResults.n = trials;
+                newResults.elapsed_secs = seconds;  // TODO: update mongo shell to return actual elapsed time
+                threadNewResults[threadCount] = newResults;
             }
             threadResults['run_end_time'] = new Date();
             testResults['results'].push({
                 name: test.name,
-                results: threadResults
+                results: threadResults,
+                nresults: threadNewResults
             });
 
             if (reportLabel) {
@@ -468,11 +488,12 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 if (resultsCollection.findOne(queryDoc)) {
                     var innerUpdateDoc = {};
                     innerUpdateDoc[resultsArr + ".$.results"] = threadResults;
+                    innerUpdateDoc[resultsArr + ".$.nresults"] = threadNewResults;
                     innerUpdateDoc['end_time'] = end_time;
                     resultsCollection.update(queryDoc, { $set: innerUpdateDoc });
                 } else {
                     var innerUpdateDoc = {};
-                    innerUpdateDoc[resultsArr] = { name: test.name, results: threadResults };
+                    innerUpdateDoc[resultsArr] = { name: test.name, results: threadResults, nresults : threadNewResults };
                     resultsCollection.update({ _id: myId }, { $push: innerUpdateDoc, $set: {end_time: end_time } });
                 }
             }

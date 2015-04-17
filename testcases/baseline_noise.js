@@ -10,21 +10,21 @@ tests.push( { name: "Commands.illegalOp",
               ] } );
 
 // This does not contact the server. Noop in benchrun loop
-tests.push( { name: "Commands.nop",
+tests.push( { name: "Benchrun.nop",
               tags: ['skip','baseline'],
               ops: [
                   { op: "nop" }
               ] } );
 
 // This does not contact the server. Sleeps for 1 ms 
-tests.push( { name: "Commands.sleep.1ms.local",
+tests.push( { name: "Benchrun.sleep.1ms.local",
               tags: ['skip','baseline','sleep'],
               ops: [
                   { op: "sleepMicros", micros : NumberLong(1000) }
               ] } );
 
 // This does not contact the server. Sleeps for 10 ms 
-tests.push( { name: "Commands.sleep.10ms.local",
+tests.push( { name: "Benchrun.sleep.10ms.local",
               tags: ['skip','baseline','sleep'],
               ops: [
                   { op: "sleepMicros", micros : NumberLong(10000) }
@@ -45,24 +45,38 @@ tests.push( { name: "Commands.sleep.10ms.server",
               ] } );
 
 // This does not contact server. Copies a value in benchrun loop
-tests.push( { name: "Commands.let",
+tests.push( { name: "Benchrun.let",
               tags: ['skip','baseline'],
               ops: [
                   { op: "let", target: "x", value : 1 }
               ] } );
 
 // This does not contact server. Copies a random value in benchrun loop
-tests.push( { name: "Commands.let.randint",
+tests.push( { name: "Benchrun.let.randint",
               tags: ['skip','baseline'],
               ops: [
                   { op: "let", target: "x", value : {"#RAND_INT_PLUS_THREAD": [0,100]} }
               ] } );
 
 // This does not contact server. Copies a random value in benchrun loop
-tests.push( { name: "Commands.let.randstring",
+tests.push( { name: "Benchrun.let.randstring",
               tags: ['skip','baseline'],
               ops: [
                   { op: "let", target: "x", value : {"#RAND_STRING": [10]} }
+              ] } );
+
+// This does not contact server. Runs a for loop in the sheel
+tests.push( { name: "Benchrun.cpuload",
+              tags: ['skip','baseline'],
+              ops: [
+                  { op: "cpuload", factor: 1}
+              ] } );
+
+// This does not contact server. Runs a for loop in the sheel
+tests.push( { name: "Benchrun.cpuloadx100",
+              tags: ['skip','baseline'],
+              ops: [
+                  { op: "cpuload", factor: 100}
               ] } );
 
 // This contacts the server and does a noop on the server
@@ -73,7 +87,7 @@ tests.push( { name: "Commands.noop",
                     ns : "#B_DB",
                     command : { noop : 1}}
               ] } );
-// This contacts the server and does a noop on the server
+// This contacts the server and runs a for loop on the server
 tests.push( { name: "Commands.cpuload",
               tags: ['skip', 'baseline'],
               ops: [
@@ -81,7 +95,7 @@ tests.push( { name: "Commands.cpuload",
                     ns : "#B_DB",
                     command : { cpuload : 1}}
               ] } );
-// This contacts the server and does a noop on the server
+// This contacts the server and does a for loop on the server
 tests.push( { name: "Commands.cpuloadx100",
               tags: ['skip', 'baseline'],
               ops: [

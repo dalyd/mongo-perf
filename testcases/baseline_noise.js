@@ -34,14 +34,14 @@ tests.push( { name: "Commands.sleep.10ms.local",
 tests.push( { name: "Commands.sleep.1ms.server",
               tags: ['skip','baseline','sleep'],
               ops: [
-                  {op : "command", ns : "admin", command : {"sleepmicros" : 1, micros : NumberLong(1000)}}
+                  {op : "command", ns : "admin", command : {"sleepmicros" : 1, micros : 1000}}
               ] } );
 
 // Sleeps for 10 ms on server
 tests.push( { name: "Commands.sleep.10ms.server",
               tags: ['skip','baseline','sleep'],
               ops: [
-                  {op : "command", ns : "#B_DB", command : {"sleepmicros" : 1, micros : NumberLong(10000)}}
+                  {op : "command", ns : "#B_DB", command : {"sleepmicros" : 1, micros : 10000}}
               ] } );
 
 // This does not contact server. Copies a value in benchrun loop

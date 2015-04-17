@@ -451,7 +451,7 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                     values[j] = results[j].ops_per_sec
                 }
                 // uncomment if one needs to save the trial values that comprise the mean
-                //newResults.ops_per_sec_values = values;
+                newResults.ops_per_sec_values = values;
                 newResults.ops_per_sec = getMean(values);
                 newResults.median = getMedian(values);
                 newResults.standardDeviation = Math.sqrt(getVariance(values));

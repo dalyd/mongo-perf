@@ -444,6 +444,11 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 }
                 // uncomment if one needs to save the trial values that comprise the mean
                 newResults.ops_per_sec_values = values;
+                // repeating the values assignment to keep the ops_per_sec_value unsorted
+                var values = [];
+                for (var j = 0; j < trials; j++) {
+                    values[j] = results[j].ops_per_sec
+                }
                 newResults.ops_per_sec = getMean(values);
                 newResults.median = getMedian(values);
                 newResults.standardDeviation = Math.sqrt(getVariance(values));
@@ -461,6 +466,14 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 for (var j = 0; j < trials; j++) {
                     values[j] = results[j].tops_per_sec;
                 }
+                // uncomment if one needs to save the trial values that comprise the mean
+                newResults.ops_per_sec_values = values;
+                // repeating the values assignment to keep the ops_per_sec_value unsorted
+                var values = [];
+                for (var j = 0; j < trials; j++) {
+                    values[j] = results[j].ops_per_sec
+                }
+
                 newResults.ops_per_sec = getMean(values);
                 newResults.median = getMedian(values);
                 newResults.standardDeviation = Math.sqrt(getVariance(values));

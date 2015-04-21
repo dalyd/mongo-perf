@@ -53,7 +53,7 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse",
               },
 
               ops : [
-                  { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] } } }
+                  { op: "find", query:  { x : {"#RAND_INT" : [ 0, 4800 ]}, a : {$lt : 4800  } } }
               ] } );
 
 
@@ -84,7 +84,7 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
               },
 
               ops : [
-                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] } } } }
+                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ]}}, a : {$lt : 4800  } }  }
               ] } );
 
 // Compare to the selective. How much does the selective help?
@@ -106,7 +106,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse",
               },
 
               ops : [
-                  { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] } } }
+                  { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : {$lt : 4800  } } }
               ] } );
 
 // compare to the filtered selective case. Any difference?
@@ -128,7 +128,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
               },
 
               ops : [
-                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] } } } }
+                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] }}, a : {$lt : 4800  } } } 
               ] } );
 
 // Compare to the filtered case
@@ -150,7 +150,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
               },
 
               ops : [
-                  { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] } } }
+                  { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : {$lt : 4800  } } }
               ] } );
 
 tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
@@ -170,7 +170,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
               },
 
               ops : [
-                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] } } } }
+                  { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] }}, a : {$lt : 4800  } } } 
               ] } );
 
 // Compare to the filtered index filter-unused case. Both are column scans

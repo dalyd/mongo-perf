@@ -11,7 +11,7 @@ tests.push( { name: "Commands.illegalOp",
 
 // This does not contact the server. Noop in benchrun loop
 tests.push( { name: "Benchrun.nop",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline', 'nop'],
               ops: [
                   { op: "nop" }
               ] } );
@@ -138,7 +138,7 @@ tests.push( { name: "Commands.isMaster",
 
 // This contacts the server and does a noop on the server
 tests.push( { name: "Commands.sleep",
-              tags: ['skip', 'baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "command", 
                     ns : "admin",

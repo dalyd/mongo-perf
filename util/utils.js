@@ -471,7 +471,7 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 // repeating the values assignment to keep the ops_per_sec_value unsorted
                 var values = [];
                 for (var j = 0; j < trials; j++) {
-                    values[j] = results[j].ops_per_sec
+                    values[j] = results[j].tops_per_sec
                 }
 
                 newResults.ops_per_sec = getMean(values);

@@ -75,7 +75,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
 
 // compare to filtered index, filtered used
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
-              tags: ['insert','monthly'],
+              tags: ['insert','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -86,7 +86,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
 
 // compare to filtered index -- non-selective
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
-              tags: ['insert','monthly'],
+              tags: ['insert','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },

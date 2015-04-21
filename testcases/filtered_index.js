@@ -133,7 +133,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
 
 // Compare to the filtered case
 tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -144,7 +144,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
 
 // Compare to the non-selective filtered index
 tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -154,7 +154,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
               ] } );
 
 tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -164,7 +164,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
               ] } );
 
 tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -175,7 +175,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
 
 // Compare to the filtered index filter-unused case. Both are column scans
 tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTest(collection);
               },
@@ -186,7 +186,7 @@ tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
 
 // Compare to the filtered index filter-unused case. Both are column scans
 tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused.lte",
-              tags: ['query','monthly'],
+              tags: ['query','baseline'],
               pre: function( collection ) {
                   setupTest(collection);
               },

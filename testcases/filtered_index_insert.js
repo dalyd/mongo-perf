@@ -21,8 +21,8 @@ var setupTestIndexed = function (collection) {
     collection.createIndex( { x : 1 });
 }
 
-tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
-              tags: ['partial_index','insert','monthly'],
+tests.push( { name : "Inserts.PartialIndex.v1.FilteredRange",
+              tags: ['partial_index','insert','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -31,8 +31,8 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
                   { op: "insert", doc:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {"#RAND_INT" : [ 0, 500 ]} } }
               ] } );
 
-tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
-              tags: ['partial_index','insert','monthly'],
+tests.push( { name : "Inserts.PartialIndex.v1.NonFilteredRange",
+              tags: ['partial_index','insert','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -41,8 +41,8 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
                   { op: "insert", doc:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {"#RAND_INT" : [ 500, 4800 ]} } }
               ] } );
 
-tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
-              tags: ['partial_index','insert','monthly'],
+tests.push( { name : "Inserts.PartialIndex.v1.FullRange",
+              tags: ['partial_index','insert','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -52,8 +52,8 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
               ] } );
 
 // Compare to filtered index. Should be the same
-tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
-              tags: ['partial_index','insert','monthly'],
+tests.push( { name : "Inserts.PartialIndex.AllInIndex.v1.FilteredRange",
+              tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -63,8 +63,8 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
               ] } );
 
 // compare to general index
-tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
-              tags: ['partial_index','insert','monthly'],
+tests.push( { name : "Inserts.PartialIndex.AllInIndex.v1.FullRange",
+              tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -74,8 +74,8 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
               ] } );
 
 // compare to filtered index, filtered used
-tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
-              tags: ['partial_index','insert','baseline'],
+tests.push( { name : "Inserts.PartialIndex.indexed.v1.FilteredRange",
+              tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -85,8 +85,8 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
               ] } );
 
 // compare to filtered index -- non-selective
-tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
-              tags: ['partial_index','insert','baseline'],
+tests.push( { name : "Inserts.PartialIndex.indexed.v1.FullRange",
+              tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },

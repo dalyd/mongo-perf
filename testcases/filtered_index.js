@@ -26,8 +26,8 @@ var setupTestIndexed = function (collection) {
     collection.createIndex( { x : 1 });
 }
 
-tests.push( { name : "Filtered_Index.v1.filter-used",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.FilteredRange",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -36,8 +36,8 @@ tests.push( { name : "Filtered_Index.v1.filter-used",
                   { op: "find", query:  { x : {"#RAND_INT" : [ 0, 500 ]}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.v1.filter-unused",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.NonFilteredRange",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -46,8 +46,8 @@ tests.push( { name : "Filtered_Index.v1.filter-unused",
                   { op: "find", query:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {$gte : 500  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.v1.filter-mixuse",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.FullRange",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -57,8 +57,8 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse",
               ] } );
 
 
-tests.push( { name : "Filtered_Index.v1.filter-used.lte",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.FilteredRange.Inequality",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -67,8 +67,8 @@ tests.push( { name : "Filtered_Index.v1.filter-used.lte",
                   { op: "findOne", query:  { x : {$lte : {"#RAND_INT" : [ 0, 500 ]}}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.v1.filter-unused.lte",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.NonFilteredRange.Inequality",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -77,8 +77,8 @@ tests.push( { name : "Filtered_Index.v1.filter-unused.lte",
                   { op: "findOne", query:  { x : {$lte : {"#RAND_INT" : [ 500, 4800 ]}}, a : {$gte : 500  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.v1.FullRange.Inequality",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -88,8 +88,8 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
               ] } );
 
 // Compare to the selective. How much does the selective help?
-tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.AllInFilter.v1.FilteredRange",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -99,8 +99,8 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used",
               ] } );
 
 // Compare to the regular index case
-tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.AllInFilter.v1.FullRange",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -110,8 +110,8 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse",
               ] } );
 
 // compare to the filtered selective case. Any difference?
-tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used.lte",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.AllInFilter.v1.FilteredRange.Inequality",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -121,8 +121,8 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used.lte",
               ] } );
 
 // compare to regular index
-tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
-              tags: ['partial_index','query','monthly'],
+tests.push( { name : "Queries.PartialIndex.AllInFilter.v1.FullRange.Inequality",
+              tags: ['partial_index','query','daily'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -132,8 +132,8 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
               ] } );
 
 // Compare to the filtered case
-tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
-              tags: ['partial_index','query','baseline'],
+tests.push( { name : "Queries.PartialIndex.RegularIndex.v1.FilteredRange",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -143,8 +143,8 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
               ] } );
 
 // Compare to the non-selective filtered index
-tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
-              tags: ['partial_index','query','baseline'],
+tests.push( { name : "Queries.PartialIndex.RegularIndex.v1.FullRange",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -153,8 +153,8 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
                   { op: "find", query:  { x : { "#RAND_INT" : [ 0 , 4800 ] }, a : {$lt : 4800  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
-              tags: ['partial_index','query','baseline'],
+tests.push( { name : "Queries.PartialIndex.RegularIndex.v1.FilteredRange.Inequality",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -163,8 +163,8 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
                   { op: "findOne", query:  { x : {$lte : {"#RAND_INT" : [ 0, 500 ]}}, a : {$lt : 500  } } }
               ] } );
 
-tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
-              tags: ['partial_index','query','baseline'],
+tests.push( { name : "Queries.PartialIndex.RegularIndex.v1.FullRange.Inequality",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -173,9 +173,9 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
                   { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] }}, a : {$lt : 4800  } } } 
               ] } );
 
-// Compare to the filtered index filter-unused case. Both are collection scans
-tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
-              tags: ['partial_index','query','baseline'],
+// Compare to the filtered index NonFilteredRange case. Both are collection scans
+tests.push( { name : "Queries.PartialIndex.not-indexed.v1.NonFilteredRange",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTest(collection);
               },
@@ -184,9 +184,9 @@ tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
                   { op: "find", query:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {$gte : 500  } } }
               ] } );
 
-// Compare to the filtered index filter-unused case. Both are collection scans
-tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused.lte",
-              tags: ['partial_index','query','baseline'],
+// Compare to the filtered index NonFilteredRange case. Both are collection scans
+tests.push( { name : "Queries.PartialIndex.not-indexed.v1.NonFilteredRange.Inequality",
+              tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTest(collection);
               },

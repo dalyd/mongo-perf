@@ -174,7 +174,7 @@ tests.push( { name : "Queries.PartialIndex.RegularIndex.v1.FullRange.Inequality"
               ] } );
 
 // Compare to the filtered index NonFilteredRange case. Both are collection scans
-tests.push( { name : "Queries.PartialIndex.not-indexed.v1.NonFilteredRange",
+tests.push( { name : "Queries.PartialIndex.NoIndexed.v1.NonFilteredRange",
               tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTest(collection);
@@ -185,7 +185,7 @@ tests.push( { name : "Queries.PartialIndex.not-indexed.v1.NonFilteredRange",
               ] } );
 
 // Compare to the filtered index NonFilteredRange case. Both are collection scans
-tests.push( { name : "Queries.PartialIndex.not-indexed.v1.NonFilteredRange.Inequality",
+tests.push( { name : "Queries.PartialIndex.NoIndexed.v1.NonFilteredRange.Inequality",
               tags: ['partial_index','query'],
               pre: function( collection ) {
                   setupTest(collection);

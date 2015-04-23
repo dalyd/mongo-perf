@@ -74,7 +74,7 @@ tests.push( { name : "Inserts.PartialIndex.AllInIndex.v1.FullRange",
               ] } );
 
 // compare to filtered index, filtered used
-tests.push( { name : "Inserts.PartialIndex.indexed.v1.FilteredRange",
+tests.push( { name : "Inserts.PartialIndex.RegularIndexed.v1.FilteredRange",
               tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
@@ -85,7 +85,7 @@ tests.push( { name : "Inserts.PartialIndex.indexed.v1.FilteredRange",
               ] } );
 
 // compare to filtered index -- non-selective
-tests.push( { name : "Inserts.PartialIndex.indexed.v1.FullRange",
+tests.push( { name : "Inserts.PartialIndex.RegularIndexed.v1.FullRange",
               tags: ['partial_index','insert'],
               pre: function( collection ) {
                   setupTestIndexed(collection);

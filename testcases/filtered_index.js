@@ -27,7 +27,7 @@ var setupTestIndexed = function (collection) {
 }
 
 tests.push( { name : "Filtered_Index.v1.filter-used",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -37,7 +37,7 @@ tests.push( { name : "Filtered_Index.v1.filter-used",
               ] } );
 
 tests.push( { name : "Filtered_Index.v1.filter-unused",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -47,7 +47,7 @@ tests.push( { name : "Filtered_Index.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index.v1.filter-mixuse",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -58,7 +58,7 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse",
 
 
 tests.push( { name : "Filtered_Index.v1.filter-used.lte",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -68,7 +68,7 @@ tests.push( { name : "Filtered_Index.v1.filter-used.lte",
               ] } );
 
 tests.push( { name : "Filtered_Index.v1.filter-unused.lte",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -78,7 +78,7 @@ tests.push( { name : "Filtered_Index.v1.filter-unused.lte",
               ] } );
 
 tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -89,7 +89,7 @@ tests.push( { name : "Filtered_Index.v1.filter-mixuse.lte",
 
 // Compare to the selective. How much does the selective help?
 tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -100,7 +100,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used",
 
 // Compare to the regular index case
 tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -111,7 +111,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse",
 
 // compare to the filtered selective case. Any difference?
 tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used.lte",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -122,7 +122,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-used.lte",
 
 // compare to regular index
 tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
-              tags: ['query','monthly'],
+              tags: ['partial_index','query','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -133,7 +133,7 @@ tests.push( { name : "Filtered_Index.Non_Selective.v1.filter-mixuse.lte",
 
 // Compare to the filtered case
 tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -144,7 +144,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used",
 
 // Compare to the non-selective filtered index
 tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -154,7 +154,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse",
               ] } );
 
 tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -164,7 +164,7 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-used.lte",
               ] } );
 
 tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -173,9 +173,9 @@ tests.push( { name : "Filtered_Index.indexed.v1.filter-mixuse.lte",
                   { op: "findOne", query:  { x : {$lte : { "#RAND_INT" : [ 0 , 4800 ] }}, a : {$lt : 4800  } } } 
               ] } );
 
-// Compare to the filtered index filter-unused case. Both are column scans
+// Compare to the filtered index filter-unused case. Both are collection scans
 tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTest(collection);
               },
@@ -184,9 +184,9 @@ tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused",
                   { op: "find", query:  { x : {"#RAND_INT" : [ 500, 4800 ]}, a : {$gte : 500  } } }
               ] } );
 
-// Compare to the filtered index filter-unused case. Both are column scans
+// Compare to the filtered index filter-unused case. Both are collection scans
 tests.push( { name : "Filtered_Index.not-indexed.v1.filter-unused.lte",
-              tags: ['query','baseline'],
+              tags: ['partial_index','query','baseline'],
               pre: function( collection ) {
                   setupTest(collection);
               },

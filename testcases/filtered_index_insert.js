@@ -22,7 +22,7 @@ var setupTestIndexed = function (collection) {
 }
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
-              tags: ['insert','monthly'],
+              tags: ['partial_index','insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -32,7 +32,7 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-used",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
-              tags: ['insert','monthly'],
+              tags: ['partial_index','insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -42,7 +42,7 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-unused",
               ] } );
 
 tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
-              tags: ['insert','monthly'],
+              tags: ['partial_index','insert','monthly'],
               pre: function( collection ) {
                   setupTestFiltered(collection);
               },
@@ -53,7 +53,7 @@ tests.push( { name : "Filtered_Index_Insert.v1.filter-mixuse",
 
 // Compare to filtered index. Should be the same
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
-              tags: ['insert','monthly'],
+              tags: ['partial_index','insert','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -64,7 +64,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-used",
 
 // compare to general index
 tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
-              tags: ['insert','monthly'],
+              tags: ['partial_index','insert','monthly'],
               pre: function( collection ) {
                   setupTestFilteredNonSelective(collection);
               },
@@ -75,7 +75,7 @@ tests.push( { name : "Filtered_Index_Insert.Non_Selective.v1.filter-mixuse",
 
 // compare to filtered index, filtered used
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
-              tags: ['insert','baseline'],
+              tags: ['partial_index','insert','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },
@@ -86,7 +86,7 @@ tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-used",
 
 // compare to filtered index -- non-selective
 tests.push( { name : "Filtered_Index_Insert.indexed.v1.filter-mixuse",
-              tags: ['insert','baseline'],
+              tags: ['partial_index','insert','baseline'],
               pre: function( collection ) {
                   setupTestIndexed(collection);
               },

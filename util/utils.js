@@ -185,7 +185,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, writeOptio
         }
     }
 
-    return { ops_per_sec: total, tops_per_sec : result["TotalOps/s"], error_count : result["errCount"]};
+    return { ops_per_sec: total, tops_per_sec : result["TotalOps/s"], error_count : result["errCount"], threadops : result["threadops"]};
 }
 
 function medianCompare(x, y) {
@@ -462,12 +462,15 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, reportLabel
                 newResults.errors = values;
                 threadResults[threadCount] = newResults;
                 var newResults = {};
+                tvalues = [];
                 values = [];
                 for (var j = 0; j < trials; j++) {
                     values[j] = results[j].tops_per_sec;
+                    tvalues[j] = results[j].threadops;
                 }
                 // uncomment if one needs to save the trial values that comprise the mean
                 newResults.ops_per_sec_values = values;
+                newResults.threadops = tvalues;
                 // repeating the values assignment to keep the ops_per_sec_value unsorted
                 var values = [];
                 for (var j = 0; j < trials; j++) {

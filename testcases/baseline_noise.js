@@ -46,35 +46,35 @@ tests.push( { name: "Commands.sleep.10ms.server",
 
 // This does not contact server. Copies a value in benchrun loop
 tests.push( { name: "Benchrun.let",
-              tags: ['skip','baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "let", target: "x", value : 1 }
               ] } );
 
 // This does not contact server. Copies a random value in benchrun loop
 tests.push( { name: "Benchrun.let.randint",
-              tags: ['skip','baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "let", target: "x", value : {"#RAND_INT_PLUS_THREAD": [0,100]} }
               ] } );
 
 // This does not contact server. Copies a random value in benchrun loop
 tests.push( { name: "Benchrun.let.randstring",
-              tags: ['skip','baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "let", target: "x", value : {"#RAND_STRING": [10]} }
               ] } );
 
 // This does not contact server. Runs a for loop in the sheel
 tests.push( { name: "Benchrun.cpuload",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline','cpu'],
               ops: [
                   { op: "cpuload", factor: 1}
               ] } );
 
 // This does not contact server. Runs a for loop in the sheel
 tests.push( { name: "Benchrun.cpuloadx100",
-              tags: ['skip','baseline'],
+              tags: ['skip','baseline','cpu'],
               ops: [
                   { op: "cpuload", factor: 100}
               ] } );
@@ -113,7 +113,7 @@ tests.push( { name: "Commands.ping",
               ] } );
 // This contacts the server and does a noop on the server
 tests.push( { name: "Commands.uri",
-              tags: ['skip', 'baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "command", 
                     ns : "#B_DB",
@@ -121,7 +121,7 @@ tests.push( { name: "Commands.uri",
               ] } );
 // This contacts the server and does a noop on the server
 tests.push( { name: "Commands.buildinfo",
-              tags: ['skip', 'baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "command", 
                     ns : "#B_DB",
@@ -129,7 +129,7 @@ tests.push( { name: "Commands.buildinfo",
               ] } );
 // This contacts the server and does a noop on the server
 tests.push( { name: "Commands.isMaster",
-              tags: ['skip', 'baseline'],
+              tags: ['skip'],
               ops: [
                   { op: "command", 
                     ns : "#B_DB",

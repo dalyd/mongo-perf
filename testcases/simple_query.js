@@ -11,11 +11,11 @@ tests.push( { name : "Queries.Empty",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( {} );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops : [
@@ -32,11 +32,11 @@ tests.push( { name : "Queries.NoMatch",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( {} );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops : [
@@ -53,11 +53,11 @@ tests.push( { name: "Queries.IntIdFindOne",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -73,11 +73,11 @@ tests.push( { name: "Queries.IntNonIdFindOne",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -95,11 +95,11 @@ tests.push( { name : "Queries.IntIDRange",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops : [
@@ -114,11 +114,11 @@ tests.push( { name : "Queries.IntNonIDRange",
              tags: ['query','indexed'],
              pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -134,11 +134,11 @@ tests.push( { name: "Queries.RegexPrefixFindOne",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i.toString() } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -156,11 +156,11 @@ tests.push( { name: "Queries.TwoInts",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x: i, y: 2*i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex({x: 1});
                   collection.ensureIndex({y: 1});
@@ -185,11 +185,11 @@ tests.push( { name: "Queries.IntNonIdFindOneProjectionCovered",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -211,11 +211,11 @@ tests.push( { name: "Queries.IntNonIdFindOneProjection",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -236,11 +236,11 @@ tests.push( { name: "Queries.IntNonIdFindProjectionCovered",
               tags: ['query','indexed','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -261,11 +261,11 @@ tests.push( { name: "Queries.FindProjection",
               tags: ['query','indexed','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -285,7 +285,7 @@ tests.push( { name: "Queries.FindWideDocProjection",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { a : i, 
                           b: i, c: i, d: i, e: i,
@@ -296,7 +296,7 @@ tests.push( { name: "Queries.FindWideDocProjection",
                           v: i, w: i, x: i, y: i, z: 1
                       } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -317,11 +317,11 @@ tests.push( { name: "Queries.FindProjectionThreeFieldsCovered",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i, y: i, z: i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1, y : 1, z : 1 } );
               },
@@ -341,11 +341,11 @@ tests.push( { name: "Queries.FindProjectionThreeFields",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i, y: i, z: i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -364,11 +364,11 @@ tests.push( { name: "Queries.FindProjectionDottedField",
               tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : { y: i } } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -387,11 +387,11 @@ tests.push( { name: "Queries.FindProjectionDottedField.Indexed",
               tags: ['query','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : { y: i } } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { "x.y" : 1 } );
               },
@@ -409,12 +409,12 @@ tests.push( { name: "Queries.LargeDocs",
               tags: ['query'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   var bigString = new Array(1024*1024*5).toString();
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : bigString } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
               },
               ops: [
                   { op: "find", query: {} }

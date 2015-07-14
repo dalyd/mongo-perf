@@ -12,11 +12,11 @@ tests.push( { name: "Update.IncNoIndex",
               tags: ['update','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -36,11 +36,11 @@ tests.push( { name: "Update.IncWithIndex",
               tags: ['update','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -104,7 +104,7 @@ tests.push( { name: "Update.IncFewSmallDoc",
               pre: function( collection ) {
                   collection.drop();
                   
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 100; i++) {
                       var toInsert = {_id: i};
                       for (var j = 0; j < 20; j++) {
@@ -112,7 +112,7 @@ tests.push( { name: "Update.IncFewSmallDoc",
                       }
                       docs.push(toInsert);
                  }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -138,7 +138,7 @@ tests.push( { name: "Update.IncFewLargeDoc",
               pre: function( collection ) {
                   collection.drop();
                   
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 100; i++) {
                       var toInsert = {_id: i};
                       for (var j = 0; j < shortFieldNames.length; j++) {
@@ -146,7 +146,7 @@ tests.push( { name: "Update.IncFewLargeDoc",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -182,7 +182,7 @@ tests.push( { name: "Update.IncFewSmallDocLongFields",
               tags: ['update','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 100; i++) {
                       var toInsert = {_id: i};
                       for (var j = 0; j < 20; j++) {
@@ -190,7 +190,7 @@ tests.push( { name: "Update.IncFewSmallDocLongFields",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -216,7 +216,7 @@ tests.push( { name: "Update.IncFewLargeDocLongFields",
               pre: function( collection ) {
                   collection.drop();
 
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 100; i++) {
                       var toInsert = {_id: i};
                       for (var j = 0; j < longFieldNames.length; j++) {
@@ -224,7 +224,7 @@ tests.push( { name: "Update.IncFewLargeDocLongFields",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -258,12 +258,12 @@ tests.push( { name: "Update.SingleDocFieldAtOffset",
                       toInsert["a_" + i.toString()] = "a";
                   }
 
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 4800; i++) {
                       toInsert["_id"] = i;
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -300,11 +300,11 @@ tests.push( { name: "Update.FieldAtOffset",
                       toInsert["a_" + i.toString()] = "a";
                   }
                   
-                  var docs = []
+                  var docs = [];
                   for (var i = 0; i < 100; i++) {
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [

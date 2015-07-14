@@ -50,11 +50,11 @@ tests.push( { name: "Commands.CountsFullCollection",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -70,11 +70,11 @@ tests.push( { name: "Commands.CountsIntIDRange",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  var docs = []
+                  var docs = [];
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false})
+                  collection.insert(docs, {ordered : false});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -121,26 +121,26 @@ function genDistinctTest( name, index, query ) {
     if ( index ) {
         doc.pre = function( collection ) {
             collection.drop();
-            var docs = []
+            var docs = [];
             for ( var i = 0; i < 4800; i++ ) {
                 docs.push( { x : 1 } );
                 docs.push( { x : 2 } );
                 docs.push( { x : 3 } );
             }
-            collection.insert(docs, {ordered:false})
+            collection.insert(docs, {ordered:false});
             collection.ensureIndex( { x : 1 } );
         };
     }
     else {
         doc.pre = function( collection ) {
             collection.drop();
-            var docs = []
+            var docs = [];
             for ( var i = 0; i < 4800; i++ ) {
                 docs.push( { x : 1 } );
                 docs.push( { x : 2 } );
                 docs.push( { x : 3 } );
             }
-            collection.insert(docs, {ordered:false})
+            collection.insert(docs, {ordered:false});
             collection.getDB().getLastError();
         };
     }

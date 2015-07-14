@@ -296,7 +296,7 @@ tests.push( { name: "MultiUpdate.Contended.Doc.Seq.Indexed",
             
 var setupTestContendedRndDoc = function( collection ) {
     collection.drop();
-    var docs = []
+    var docs = [];
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }

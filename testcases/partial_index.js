@@ -9,9 +9,10 @@ if ( typeof(tests) != "object" ) {
 var setupTest = function (collection) {
     collection.drop();
     for ( var i = 0; i < 4800; i++ ) {
-        var docs = []
-        collection.insert( { x : i, a : i } );
+        var docs = [];
+        docs.push( { x : i, a : i } );
     }
+    collection.insert(docs, {ordered : false});
     collection.getDB().getLastError();
  
 }

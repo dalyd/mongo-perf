@@ -65,12 +65,12 @@ function generatePhraseLowerCase(pos, term) {
 function populateCollection(col, term, entry) {
     col.drop();
     col.createIndex( { x: "text"}, {default_language: language} );
-    var docs = []
+    var docs = [];
     for (var i = 0; i < entry; i++) {
         docs.push({ x: generatePhrase(i, term) });
         docs.push({ x: generatePhraseLowerCase(i, term) });
     }
-    col.insert(docs, {ordered: false})
+    col.insert(docs, {ordered: false});
     col.getDB().getLastError();
 }
 

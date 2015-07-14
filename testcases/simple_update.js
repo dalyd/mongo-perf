@@ -252,14 +252,13 @@ tests.push( { name: "Update.SingleDocFieldAtOffset",
 
                   var kFieldCount = 512;
 
-                  // Build the document and insert several copies.
-                  var toInsert = {};
-                  for (var i = 0; i < kFieldCount; i++) {
-                      toInsert["a_" + i.toString()] = "a";
-                  }
-
                   var docs = [];
                   for (var i = 0; i < 4800; i++) {
+                      // Build the document and insert several copies.
+                      var toInsert = {};
+                      for (var j = 0; j < kFieldCount; j++) {
+                          toInsert["a_" + j.toString()] = "a";
+                      }
                       toInsert["_id"] = i;
                       docs.push(toInsert);
                   }

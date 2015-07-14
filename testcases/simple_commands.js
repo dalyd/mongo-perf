@@ -50,7 +50,7 @@ tests.push( { name: "Commands.CountsFullCollection",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
@@ -70,7 +70,7 @@ tests.push( { name: "Commands.CountsIntIDRange",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
@@ -121,7 +121,7 @@ function genDistinctTest( name, index, query ) {
     if ( index ) {
         doc.pre = function( collection ) {
             collection.drop();
-            docs = []
+            var docs = []
             for ( var i = 0; i < 4800; i++ ) {
                 docs.push( { x : 1 } );
                 docs.push( { x : 2 } );
@@ -134,7 +134,7 @@ function genDistinctTest( name, index, query ) {
     else {
         doc.pre = function( collection ) {
             collection.drop();
-            docs = []
+            var docs = []
             for ( var i = 0; i < 4800; i++ ) {
                 docs.push( { x : 1 } );
                 docs.push( { x : 2 } );

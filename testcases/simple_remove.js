@@ -11,7 +11,7 @@ tests.push( { name: "Remove.IntId",
               tags: ['remove','core'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
@@ -35,7 +35,7 @@ tests.push( { name: "Remove.IntNonIdNoIndex",
               tags: ['remove','regression'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
@@ -60,7 +60,7 @@ tests.push( { name: "Remove.IntNonIdIndex",
               tags: ['remove','core','indexed'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }

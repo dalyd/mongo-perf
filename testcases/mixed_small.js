@@ -14,7 +14,7 @@ tests.push( { name: "Mixed.FindOneUpdateIntId-50-50",
               tags: ['mixed','core'],
               pre: function( collection ) {
                   collection.drop();
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
@@ -44,7 +44,7 @@ tests.push( { name: "Mixed.FindThenUpdate-50-50",
               pre: function( collection ) {
                   collection.drop();
 
-                  docs = []
+                  var docs = []
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i, y : generateRandomString(1024) } );
                   }

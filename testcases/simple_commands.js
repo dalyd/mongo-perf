@@ -50,9 +50,11 @@ tests.push( { name: "Commands.CountsFullCollection",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
+                  docs = []
                   for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { _id : i } );
+                      docs.push( { _id : i } );
                   }
+                  collection.insert(docs, {ordered : false})
                   collection.getDB().getLastError();
               },
               ops: [
@@ -68,9 +70,11 @@ tests.push( { name: "Commands.CountsIntIDRange",
               tags: ['command','regression'],
               pre: function( collection ) {
                   collection.drop();
+                  docs = []
                   for ( var i = 0; i < 4800; i++ ) {
-                      collection.insert( { _id : i } );
+                      docs.push( { _id : i } );
                   }
+                  collection.insert(docs, {ordered : false})
                   collection.getDB().getLastError();
               },
               ops: [

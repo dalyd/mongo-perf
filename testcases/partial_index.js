@@ -12,7 +12,7 @@ var setupTest = function (collection) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { x : i, a : i } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();
  
 }

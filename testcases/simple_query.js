@@ -15,7 +15,7 @@ tests.push( { name : "Queries.Empty",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( {} );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops : [
@@ -36,7 +36,7 @@ tests.push( { name : "Queries.NoMatch",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( {} );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops : [
@@ -57,7 +57,7 @@ tests.push( { name: "Queries.IntIdFindOne",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops: [
@@ -77,7 +77,7 @@ tests.push( { name: "Queries.IntNonIdFindOne",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -99,7 +99,7 @@ tests.push( { name : "Queries.IntIDRange",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops : [
@@ -118,7 +118,7 @@ tests.push( { name : "Queries.IntNonIDRange",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -138,7 +138,7 @@ tests.push( { name: "Queries.RegexPrefixFindOne",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i.toString() } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -160,7 +160,7 @@ tests.push( { name: "Queries.TwoInts",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x: i, y: 2*i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex({x: 1});
                   collection.ensureIndex({y: 1});
@@ -189,7 +189,7 @@ tests.push( { name: "Queries.IntNonIdFindOneProjectionCovered",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -215,7 +215,7 @@ tests.push( { name: "Queries.IntNonIdFindOneProjection",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -240,7 +240,7 @@ tests.push( { name: "Queries.IntNonIdFindProjectionCovered",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -265,7 +265,7 @@ tests.push( { name: "Queries.FindProjection",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -296,7 +296,7 @@ tests.push( { name: "Queries.FindWideDocProjection",
                           v: i, w: i, x: i, y: i, z: 1
                       } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops: [
@@ -321,7 +321,7 @@ tests.push( { name: "Queries.FindProjectionThreeFieldsCovered",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i, y: i, z: i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1, y : 1, z : 1 } );
               },
@@ -345,7 +345,7 @@ tests.push( { name: "Queries.FindProjectionThreeFields",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : i, y: i, z: i } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops: [
@@ -368,7 +368,7 @@ tests.push( { name: "Queries.FindProjectionDottedField",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : { y: i } } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops: [
@@ -391,7 +391,7 @@ tests.push( { name: "Queries.FindProjectionDottedField.Indexed",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : { y: i } } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { "x.y" : 1 } );
               },
@@ -414,7 +414,7 @@ tests.push( { name: "Queries.LargeDocs",
                   for ( var i = 0; i < 100; i++ ) {
                       docs.push( { x : bigString } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
               },
               ops: [
                   { op: "find", query: {} }

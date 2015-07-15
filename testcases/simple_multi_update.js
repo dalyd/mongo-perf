@@ -8,7 +8,7 @@ var setupTestUncontendedSingleDoc = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();
 }
 
@@ -57,7 +57,7 @@ var setupTestUncontendedTwoDocs = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();
 };
 
@@ -106,7 +106,7 @@ var setupTestContendedLow = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();
 };                            
 
@@ -155,7 +155,7 @@ var setupTestContendedMedium = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();                               
 }
 
@@ -204,7 +204,7 @@ var setupTestContendedHot = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();                               
 }
 
@@ -254,7 +254,7 @@ var setupTestContendedSeqDoc = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
    }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();                               
 }
 
@@ -300,7 +300,7 @@ var setupTestContendedRndDoc = function( collection ) {
     for ( var i = 0; i < 4800; i++ ) {
         docs.push( { _id : i , x : 0 } );
     }
-    collection.insert(docs, {ordered : true});
+    collection.insert(docs);
     collection.getDB().getLastError();                               
 }
 

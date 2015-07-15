@@ -18,7 +18,7 @@ tests.push( { name: "Mixed.FindOneUpdateIntId-50-50",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
               },
               ops: [
@@ -48,7 +48,7 @@ tests.push( { name: "Mixed.FindThenUpdate-50-50",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i, y : generateRandomString(1024) } );
                   }
-                  collection.insert(docs, {ordered : true});
+                  collection.insert(docs);
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
                   collection.ensureIndex( { y : 1 } );

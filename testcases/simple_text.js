@@ -70,7 +70,7 @@ function populateCollection(col, term, entry) {
         docs.push({ x: generatePhrase(i, term) });
         docs.push({ x: generatePhraseLowerCase(i, term) });
     }
-    col.insert(docs, {ordered : true});
+    col.insert(docs);
     col.getDB().getLastError();
 }
 

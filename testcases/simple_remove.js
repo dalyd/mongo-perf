@@ -15,7 +15,7 @@ tests.push( { name: "Remove.IntId",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -39,7 +39,7 @@ tests.push( { name: "Remove.IntNonIdNoIndex",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -64,7 +64,7 @@ tests.push( { name: "Remove.IntNonIdIndex",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { x : i } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },

@@ -54,7 +54,7 @@ tests.push( { name: "Commands.CountsFullCollection",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -74,7 +74,7 @@ tests.push( { name: "Commands.CountsIntIDRange",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -127,7 +127,7 @@ function genDistinctTest( name, index, query ) {
                 docs.push( { x : 2 } );
                 docs.push( { x : 3 } );
             }
-            collection.insert(docs, {ordered:false});
+            collection.insert(docs, {ordered : true});
             collection.ensureIndex( { x : 1 } );
         };
     }
@@ -140,7 +140,7 @@ function genDistinctTest( name, index, query ) {
                 docs.push( { x : 2 } );
                 docs.push( { x : 3 } );
             }
-            collection.insert(docs, {ordered:false});
+            collection.insert(docs, {ordered : true});
             collection.getDB().getLastError();
         };
     }

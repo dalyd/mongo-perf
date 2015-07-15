@@ -16,7 +16,7 @@ tests.push( { name: "Update.IncNoIndex",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -40,7 +40,7 @@ tests.push( { name: "Update.IncWithIndex",
                   for ( var i = 0; i < 4800; i++ ) {
                       docs.push( { _id : i , x : 0 } );
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
                   collection.ensureIndex( { x : 1 } );
               },
@@ -112,7 +112,7 @@ tests.push( { name: "Update.IncFewSmallDoc",
                       }
                       docs.push(toInsert);
                  }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -146,7 +146,7 @@ tests.push( { name: "Update.IncFewLargeDoc",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -190,7 +190,7 @@ tests.push( { name: "Update.IncFewSmallDocLongFields",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -224,7 +224,7 @@ tests.push( { name: "Update.IncFewLargeDocLongFields",
                       }
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -262,7 +262,7 @@ tests.push( { name: "Update.SingleDocFieldAtOffset",
                       toInsert["_id"] = i;
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [
@@ -303,7 +303,7 @@ tests.push( { name: "Update.FieldAtOffset",
                   for (var i = 0; i < 100; i++) {
                       docs.push(toInsert);
                   }
-                  collection.insert(docs, {ordered : false});
+                  collection.insert(docs, {ordered : true});
                   collection.getDB().getLastError();
               },
               ops: [

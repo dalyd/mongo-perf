@@ -406,7 +406,7 @@ tests.push( { name: "Queries.FindProjectionDottedField.Indexed",
  * Test: Do a table scan
  */
 tests.push( { name: "Queries.LargeDocs",
-              tags: ['query'],
+              tags: ['query','regression'],
               pre: function( collection ) {
                   collection.drop();
                   var docs = [];

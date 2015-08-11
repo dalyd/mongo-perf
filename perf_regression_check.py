@@ -31,7 +31,7 @@ def main(args):
             print "\tno previous data, skipping"
             continue
         previous = previous[0]
-        if previous["max"] - this_one["max"] >= (.0001 * previous["max"]):
+        if previous["max"] - this_one["max"] >= (.1 * previous["max"]):
             print "\tregression found: drop from %s (commit %s) to %s" % (previous["max"], previous["revision"][:5], this_one["max"])
             Failed = True
         else:

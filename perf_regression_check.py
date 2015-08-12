@@ -2,6 +2,8 @@ import argparse
 import json
 import sys
 import itertools
+from dateutil import parser
+from datetime import timedelta, datetime
 
 # Example usage:
 # perf_regression_check.py -f history_file.json --rev 18808cd923789a34abd7f13d62e7a73fafd5ce5f
@@ -31,8 +33,15 @@ def main(args):
             print "\tno previous data, skipping"
             continue
         previous = previous[0]
+        daysprevious = h.seriesItemsNDaysBefore(test, args.rev,30)
         if previous["max"] - this_one["max"] >= (.1 * previous["max"]):
             print "\tregression found: drop from %s (commit %s) to %s" % (previous["max"], previous["revision"][:5], this_one["max"])
+            Failed = True
+        elif not daysprevious :
+            print "\tno regresion against previous. No 7 day data"
+            continue
+        elif daysprevious["max"] - this_one["max"] >= (.1 * daysprevious["max"]):
+            print "\tregression found over days: drop from %s (commit %s) to %s" % (daysprevious["max"], daysprevious["revision"][:5], this_one["max"])
             Failed = True
         else:
             print "\tno regression"
@@ -79,6 +88,28 @@ class History(object):
             return results[-1*n:]
         return []
 
+
+    # I tried to do this in the form of this file. I feel like it's unneccessarily complicated right now. 
+    def seriesItemsNDaysBefore(self, testname, revision, n):
+        """
+            Returns the items in the series under the given test name that 
+            appear 'n' days prior to the specified revision.
+        """
+        results = {}
+        # Date for this revision
+        s = self.seriesAtRevision(testname, revision)
+        if s==[] : 
+            return []
+        refdate = parser.parse(s["end"]) - timedelta(days=n)
+        
+        s = self.series(testname)
+        for result in s:
+            if parser.parse(result["end"]) < refdate:
+                results = result
+        return results
+
+        
+
     def series(self, testname):
         for commit in self._raw:
             # get a copy of the samples for those whose name matches the given testname
@@ -86,6 +117,7 @@ class History(object):
             if matching:
                 result = matching[0]
                 result["revision"] = commit["revision"]
+                result["end"] = commit["data"]["end"]
                 result["order"] = commit["order"]
                 result["max"] = max(f["ops_per_sec"] for f in result["results"].values() if type(f) == type({}))
                 yield result

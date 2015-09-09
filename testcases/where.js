@@ -37,8 +37,9 @@ function increasingXGenerator() {
  */
 function arrayGenerator() {
     var results = [];
+    Random.setRandomSeed(13141516)
     for (var j = 0; j < 10; j++) {
-      results.push(Math.floor(Math.random() * 101));
+      results.push(Random.randInt(101));
     }
     return {"results": results };
 }

@@ -34,9 +34,9 @@ var enPossible = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1";
 var possible = enPossible;
 
 var dictionary = "";
-Random.setRandomSeed(13141517)
+Random.srand(13141517);
 for (var i = 0; i<dictSize; i++) 
-    dictionary += possible.charAt(Random.randInt(passible.length));
+    dictionary += possible.charAt(Random.randInt(possible.length));
 
 function generatePhrase(pos, term) {
     buf="";
@@ -85,7 +85,7 @@ function populateCollection(col, term, entry) {
 // Helper function to create oplist for single-word search
 function oplistSingleWord(caseSensitive) {
     var oplist=[];
-    Random.setRandomSeed(13141517)
+    Random.srand(13141517);
     for (var i=0; i<numQuery; i++) {
         var c = Random.randInt(dictSize-wordLength);
         oplist.push({
@@ -130,6 +130,7 @@ tests.push( { name: "Queries.Text.FindSingleCaseSensitive",
 // Helper function to create oplist for three-word search (or)
 function oplistThreeWord(caseSensitive) {
     oplist=[];
+    Random.srand(13141517);
     for (var i=0; i<numQuery; i++) {
     var p = "";
     for (var j=0; j<3; j++) {
@@ -177,7 +178,7 @@ tests.push( { name: "Queries.Text.FindThreeWordsCaseSensitive",
 // Be VERY careful with the escape character "\"
 function oplistPhrase(caseSensitive) {
     oplist=[];
-    Random.setRandomSeed(13141517)
+    Random.srand(13141517);
     for (var i=0; i<numQuery; i++) {
         var c = Random.randInt(dictSize-wordLength);
         var p = "\"";

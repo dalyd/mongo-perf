@@ -76,11 +76,11 @@ tests.push( { name: "Insert.JustID",
 
 
 // variables for vector insert test
-var batchSize = 1000;
-doc_content = { x : 1 } 
+// 1000 documents per insert
+var batchSize = 100;
 var docs = []
 for (var i = 0; i < batchSize; i++) {
-    docs.push( {x: doc_content} )
+    docs.push( {x: 1} )
 }
 
 /*
@@ -90,18 +90,20 @@ for (var i = 0; i < batchSize; i++) {
  *        
  */
 tests.push( { name: "Insert.IntVector",
-              tags: ['insert','core'],
+              tags: ['insert','regression'],
               pre: function( collection ) { collection.drop(); },
               ops: [
                   { op:  "insert",
-                    doc: doc_content }
+                    doc: docs }
               ] } );
 
 
 // Variables for vector insert of large documents
-batchSize = 1000;
+// 100 documents per patch
+batchSize = 100;
+// 1024 byte string in the document 
 var docSize = 1024;
-doc_content = '';
+var doc_content = '';
 for (var i=0; i<docSize; i++) {
     doc_content += 'x'
 }

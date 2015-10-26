@@ -74,6 +74,57 @@ tests.push( { name: "Insert.JustID",
                     doc: { _id: { "#OID": 1 } } }
               ] } );
 
+
+// variables for vector insert test
+var batchSize = 1000;
+doc_content = { x : 1 } 
+var docs = []
+for (var i = 0; i < batchSize; i++) {
+    docs.push( {x: doc_content} )
+}
+
+/*
+ * Setup:
+ * Test: Insert a vector of documents. Each document has an integer field
+ * Notes: Generates the _id field on the client
+ *        
+ */
+tests.push( { name: "Insert.IntVector",
+              tags: ['insert','core'],
+              pre: function( collection ) { collection.drop(); },
+              ops: [
+                  { op:  "insert",
+                    doc: doc_content }
+              ] } );
+
+
+// Variables for vector insert of large documents
+batchSize = 1000;
+var docSize = 1024;
+doc_content = '';
+for (var i=0; i<docSize; i++) {
+    doc_content += 'x'
+}
+var docs = []
+for (var i = 0; i < batchSize; i++) {
+    docs.push( {x: doc_content} )
+}
+/*
+ * Setup:
+ * Test: Insert a vector of large documents. Each document contains a long string
+ * Notes: Generates the _id field on the client
+ *        
+ */
+tests.push( { name: "Insert.LargeDocVector",
+              tags: ['insert','core'],
+              pre: function( collection ) { collection.drop(); },
+              ops: [
+                  { op:  "insert",
+                    doc: docs }
+              ] } );
+
+
+
 /*
  * Setup: Create index on field 'a'
  * Test: Insert empty documents into collection using sequential int for _id

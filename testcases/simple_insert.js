@@ -118,7 +118,7 @@ for (var i = 0; i < batchSize; i++) {
  *        
  */
 tests.push( { name: "Insert.LargeDocVector",
-              tags: ['insert','core'],
+              tags: ['insert','regression'],
               pre: function( collection ) { collection.drop(); },
               ops: [
                   { op:  "insert",

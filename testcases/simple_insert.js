@@ -76,7 +76,7 @@ tests.push( { name: "Insert.JustID",
 
 
 // variables for vector insert test
-// 1000 documents per insert
+// 100 documents per insert
 var batchSize = 100;
 var docs = []
 for (var i = 0; i < batchSize; i++) {
@@ -103,13 +103,18 @@ tests.push( { name: "Insert.IntVector",
 batchSize = 100;
 // 1024 byte string in the document 
 var docSize = 1024;
-var doc_content = '';
-for (var i=0; i<docSize; i++) {
-    doc_content += 'x'
+function makeDocument(docSize) {
+        var doc = { "fieldName":"" };
+        while(Object.bsonsize(doc) < docSize) {
+            doc.fieldName += "x";
+        }
+        return doc;
+    }
 }
+doc = makeDocument(docSize);
 var docs = []
 for (var i = 0; i < batchSize; i++) {
-    docs.push( {x: doc_content} )
+    docs.push(doc)
 }
 /*
  * Setup:

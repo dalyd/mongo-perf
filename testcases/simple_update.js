@@ -300,7 +300,7 @@ tests.push( { name: "Update.FieldAtOffset",
                   }
                   
                   var docs = [];
-                  for (var i = 0; i < 100; i++) {
+                  for (var i = 0; i < 90; i++) {
                       docs.push(toInsert);
                   }
                   collection.insert(docs);

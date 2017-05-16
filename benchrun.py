@@ -177,7 +177,7 @@ def main():
 
     # Open a mongo shell subprocess and load necessary files.
     mongo_proc = Popen([args.shellpath, "--norc", "--quiet",
-                       "--host", args.hostname, "--port", args.port] + auth, 
+                        "--host", args.hostname, "--port", args.port, "--networkMessageCompressors=noop"] + auth,
                        stdin=PIPE, stdout=PIPE)
 
     # load test files
@@ -209,7 +209,7 @@ def main():
               str(json.dumps(args.includeFilter)) + ", " +
               str(json.dumps(args.excludeFilter)) + ", " +
               str(args.shard) + ", " +
-              str(json.dumps(crud_options)) + ", " + 
+              str(json.dumps(crud_options)) + ", " +
               str(args.excludeTestbed) + ", " +
               str(args.printArgs) +
               authstr +
@@ -259,4 +259,3 @@ if __name__ == '__main__':
         sys.stderr.write(str(e))
         sys.exit(1)
     sys.exit(0)
-

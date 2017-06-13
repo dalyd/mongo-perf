@@ -61,6 +61,8 @@ function formatRunDate(now) {
 function checkForDroppedCollections(database){
     var numberCollections = database.runCommand("listCollections").cursor.firstBatch.length;
     var numberCollectionsIncludingPending = database.runCommand("listCollections").cursor.firstBatch.length;
+    print("Number of collections is " + numberCollections);
+    print("Number of collections including pending is " + numberCollectionsIncludingPending);
     return numberCollections != numberCollectionsIncludingPending;
 }
 
@@ -175,6 +177,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
     for (var i = 0; i < multidb; i++) {
         var sibling_db = db.getSiblingDB('test' + i);
         while (checkForDroppedCollections(sibling_db)) {
+            print("Sleeping 1 second while waiting for collection to finish dropping")
             sleep(1000);
         }
     }
@@ -221,6 +224,7 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
     for (var i = 0; i < multidb; i++) {
         var sibling_db = db.getSiblingDB('test' + i);
         while (checkForDroppedCollections(sibling_db)) {
+            print("Sleeping 1 second while waiting for collection to finish dropping")
             sleep(1000);
         }
     }

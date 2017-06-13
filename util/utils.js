@@ -60,7 +60,7 @@ function formatRunDate(now) {
 
 function checkForDroppedCollections(database){
     var numberCollections = database.runCommand("listCollections").cursor.firstBatch.length;
-    var numberCollectionsIncludingPending = database.runCommand("listCollections").cursor.firstBatch.length;
+    var numberCollectionsIncludingPending = database.runCommand("listCollections", {includePendingDrops: true}).cursor.firstBatch.length;
     print("Number of collections is " + numberCollections);
     print("Number of collections including pending is " + numberCollectionsIncludingPending);
     return numberCollections != numberCollectionsIncludingPending;

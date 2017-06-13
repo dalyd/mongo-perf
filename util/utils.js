@@ -58,6 +58,12 @@ function formatRunDate(now) {
         pad(now.getDate()));
 }
 
+function checkForDroppedCollections(database){
+    var numberCollections = database.runCommand("listCollections").cursor.firstBatch.length;
+    var numberCollectionsIncludingPending = database.runCommand("listCollections").cursor.firstBatch.length;
+    return numberCollections != numberCollectionsIncludingPending;
+}
+
 function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOptions, printArgs, username, password) {
 
     if (typeof crudOptions === "undefined") crudOptions = getDefaultCrudOptions();
@@ -163,6 +169,18 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
     if (printArgs) {
         print(JSON.stringify(benchArgs));
     }
+
+    // Make sure the system is queisced
+    // Check for dropped collections
+    for (var i = 0; i < multidb; i++) {
+        var sibling_db = db.getSiblingDB('test' + i);
+        while (checkForDroppedCollections(sibling_db)) {
+            sleep(1000);
+        }
+    }
+    db.adminCommand({fsync: 1});
+
+
     // invoke the built-in mongo shell function
     var result = benchRun(benchArgs);
 
@@ -199,6 +217,14 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
         }
     }
 
+    // Make sure all collections have been dropped
+    for (var i = 0; i < multidb; i++) {
+        var sibling_db = db.getSiblingDB('test' + i);
+        while (checkForDroppedCollections(sibling_db)) {
+            sleep(1000);
+        }
+    }
+
     return { ops_per_sec: total, error_count : result["errCount"]};
 }
 
@@ -221,7 +247,7 @@ function getDefaultCrudOptions() {
 
 function doCompare(test, compareTo) {
     var tags = test.tags;
-    
+
     if ( Array.isArray(compareTo) ) {
         for (var i = 0;i < compareTo.length; i++) {
             if ( tags.indexOf(compareTo[i]) > -1 || test.name == compareTo[i]) {
@@ -240,7 +266,7 @@ function doCompare(test, compareTo) {
 
 function doCompareExclude(test, compareTo) {
     var tags = test.tags;
-    
+
     if ( Array.isArray(compareTo) ) {
         for (var i = 0;i < compareTo.length; i++) {
             if (!( tags.indexOf(compareTo[i]) > -1 || test.name == compareTo[i])) {
@@ -258,7 +284,7 @@ function doCompareExclude(test, compareTo) {
 }
 
 function doExecute(test, includeFilter, excludeFilter) {
-    
+
     var include = false;
     // Use % to indicate all tests
     if ( !Array.isArray(includeFilter) ) {
@@ -266,12 +292,12 @@ function doExecute(test, includeFilter, excludeFilter) {
             include = true;
         }
     }
-    
+
     // If we have a textFilter but no tags, then bail
     else if ( !Array.isArray(test.tags) ) {
         return false;
     }
-    
+
     if ( !include && Array.isArray(includeFilter) ) {
         if (Array.isArray(includeFilter[0])) {
             // lists of lists of filters. Must match all lists
@@ -335,7 +361,7 @@ function runTests(threadCounts, multidb, multicoll, seconds, trials, includeFilt
     if (!excludeTestbed) {
         var basicFields = {};
         var bi = db.runCommand("buildInfo");
-        
+
         basicFields.commit = bi.gitVersion;
         if (bi.sysInfo) {
             basicFields.platform = bi.sysInfo.split(" ")[0];

@@ -59,9 +59,14 @@ function formatRunDate(now) {
 }
 
 function checkForDroppedCollections(database){
-    var numberCollections = database.runCommand("listCollections").cursor.firstBatch.length;
-    var numberCollectionsIncludingPending = database.runCommand("listCollections", {includePendingDrops: true}).cursor.firstBatch.length;
-    return numberCollections != numberCollectionsIncludingPending;
+    // Check for any collections in 'drop-pending' state. The collection name should be of the
+    // format "system.drop.<optime>.<collectionName>", where 'optime' is the optime of the
+    // collection drop operation, encoded as a string, and 'collectionName' is the original
+    // collection name.
+    var pendingDropRegex = new RegExp("system\.drop\..*\.");
+    collections = database.runCommand("listCollections", {includePendingDrops: true}).cursor.firstBatch;
+    collection = collections.find(c => pendingDropRegex.test(c.name));
+    return collection;
 }
 
 function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOptions, printArgs, username, password) {

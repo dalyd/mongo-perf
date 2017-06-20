@@ -179,10 +179,14 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
     // Check for dropped collections
     for (var i = 0; i < multidb; i++) {
         var sibling_db = db.getSiblingDB('test' + i);
-        while (checkForDroppedCollections(sibling_db)) {
+        var retries = 0;
+        while (checkForDroppedCollections(sibling_db) && retries < 1000) {
             print("Sleeping 1 second while waiting for collection to finish dropping")
+            retries += 1;
             sleep(1000);
         }
+        assert(retries < 1000, "Timeout on waiting for collections to drop")
+
     }
     db.adminCommand({fsync: 1});
 
@@ -226,10 +230,13 @@ function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOption
     // Make sure all collections have been dropped
     for (var i = 0; i < multidb; i++) {
         var sibling_db = db.getSiblingDB('test' + i);
-        while (checkForDroppedCollections(sibling_db)) {
+        var retries = 0;
+        while (checkForDroppedCollections(sibling_db) && retries < 1000) {
             print("Sleeping 1 second while waiting for collection to finish dropping")
             sleep(1000);
+            retries += 1;
         }
+        assert(retries < 1000, "Timeout on waiting for collections to drop")
     }
 
     return { ops_per_sec: total, error_count : result["errCount"]};

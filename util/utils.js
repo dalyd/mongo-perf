@@ -81,7 +81,8 @@ function checkForDroppedCollectionsTestDBs(db, multidb){
             retries += 1;
             sleep(1000);
         }
-        assert(retries < 1000, "Timeout on waiting for collections to drop")
+        assert(retries < 1000, "Timeout on waiting for collections to drop");
+    }
 }
 
 function runTest(test, thread, multidb, multicoll, runSeconds, shard, crudOptions, printArgs, username, password) {

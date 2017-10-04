@@ -90,7 +90,7 @@ function checkForDroppedCollectionsTestDBs(db, multidb){
     var serverVersion = db.version().split(".");
     var clientVersion = version().split(".");
 
-    if ( toInt(serverVersion[0]) < 3 || toInt((serverVersion[0]) == 3 && toInt(serverVersion[1]) < 5 )) {
+    if ( toInt(serverVersion[0]) < 3 || (toInt(serverVersion[0]) == 3 && toInt(serverVersion[1]) < 5 )) {
         return;
     }
     if ( toInt(clientVersion[0]) < 3 || (toInt(clientVersion[0]) == 3 && toInt(clientVersion[1]) < 2 )) {

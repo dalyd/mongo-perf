@@ -338,6 +338,9 @@ function doVersionExclude(test) {
                     print("server version ", tag);
                     return true;
                 }
+                // Don't check minor version if major is above the threshold.
+                if (toInt(serverVersion[j]) > toInt(minVersion[j]))
+                    break;
             }
         }
     }

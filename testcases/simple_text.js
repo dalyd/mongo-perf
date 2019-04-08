@@ -4,25 +4,26 @@ if ( typeof(tests) != "object" ) {
 
 
 (function () {
+    'use strict';
     // Global variables for the text index tests
-    // dictSize: number of characters in the "dictionary", number of words is 
-    //           dictSize - wordLength. we also use this as the number of 
+    // dictSize: number of characters in the "dictionary", number of words is
+    //           dictSize - wordLength. we also use this as the number of
     //           documents in a collection but that can be changed
-    // wordLength: length of the "words"; all words are the same length 
+    // wordLength: length of the "words"; all words are the same length
     //             currently but it can be changed
     // wordDistance: distance between "words" in a multi-word phrase
-    //               A document is inserted into the database with a "phrase" 
-    //               that consists of numTerm "words" that are wordDistance 
-    //               apart from each other in the dictionary. Each word is 
-    //               wordLength long. By doing this, we can be sure that the 
+    //               A document is inserted into the database with a "phrase"
+    //               that consists of numTerm "words" that are wordDistance
+    //               apart from each other in the dictionary. Each word is
+    //               wordLength long. By doing this, we can be sure that the
     //               "phrase queries" can have an exact match.
-    var language = "english"; 
+    var language = "english";
     var dictSize = 2400;      // total doc count is 4800 to match other mongo-perf tests
     var wordLength = 5;
     var wordDistance = 100;
     var numTerm = 5;
 
-    // number of queries to use in query tests; idea is to spread the hits 
+    // number of queries to use in query tests; idea is to spread the hits
     // across the tree
     var numQuery = 50;
 
@@ -30,21 +31,21 @@ if ( typeof(tests) != "object" ) {
     // Some Helper functions that are used to create the dictionary and phrases
     // of fake words for the text index
     // ============
-    // The dictionary is just a long random string. By picking fixed-sized 
+    // The dictionary is just a long random string. By picking fixed-sized
     // substrings from it, we have our "words"
     var enPossible = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1";
     var possible = enPossible;
 
     var dictionary = "";
     Random.srand(13141517);
-    for (var i = 0; i<dictSize; i++) 
+    for (var i = 0; i<dictSize; i++)
         dictionary += possible.charAt(Random.randInt(possible.length));
 
     function generatePhrase(pos, term) {
-        buf="";
+        var buf="";
         for (var i=0; i<term; i++) {
-            // Adding a stop word for every 3 fake words; can be modified to 
-            // increase or lower the frequency 
+            // Adding a stop word for every 3 fake words; can be modified to
+            // increase or lower the frequency
             if ( i%3==1) {
                 buf = buf.concat("the");
             }
@@ -80,7 +81,7 @@ if ( typeof(tests) != "object" ) {
 
 
     // ============
-    // Generate all queries with lower case words so we can exercise the 
+    // Generate all queries with lower case words so we can exercise the
     // caseSensitive switch
     // ============
 
@@ -93,14 +94,14 @@ if ( typeof(tests) != "object" ) {
             var phrase = generatePhraseLowerCase(c,1);
             if (caseSensitive) {
                 oplist.push({
-                    op: "find", 
+                    op: "find",
                     query: {
-                        $text: {$search: phrase, 
+                        $text: {$search: phrase,
                                 $caseSensitive: caseSensitive }}});
             }
             else { // don't include the $caseSensitive part of the query if it's the default value (false)
                 oplist.push({
-                    op: "find", 
+                    op: "find",
                     query: {
                         $text: {$search: phrase}}});
             }
@@ -156,7 +157,7 @@ if ( typeof(tests) != "object" ) {
 
     // Helper function to create oplist for three-word search (or)
     function oplistThreeWord(caseSensitive) {
-        oplist=[];
+        var oplist=[];
         Random.srand(13141517);
         for (var i=0; i<numQuery; i++) {
             var p = "";
@@ -166,14 +167,14 @@ if ( typeof(tests) != "object" ) {
             }
             if (caseSensitive) {
                 oplist.push({
-                    op: "find", 
+                    op: "find",
                     query: {$text: {$search: p, $caseSensitive: caseSensitive }
                            }
                 });
             }
             else {
                 oplist.push({
-                    op: "find", 
+                    op: "find",
                     query: {$text: {$search: p}
                            }
                 });
@@ -213,14 +214,14 @@ if ( typeof(tests) != "object" ) {
     // Helper function to create oplist for three-word phrase search
     // Be VERY careful with the escape character "\"
     function oplistPhrase(caseSensitive) {
-        oplist=[];
+        var oplist=[];
         Random.srand(13141517);
         for (var i=0; i<numQuery; i++) {
             var c = Random.randInt(dictSize-wordLength);
             var p = "\"";
             p = p.concat(generatePhraseLowerCase(c, numTerm), "\"");
-            oplist.push({ 
-                op: "find", 
+            oplist.push({
+                op: "find",
                 query: {
                     $text: {$search: p, $caseSensitive: caseSensitive }
                 }

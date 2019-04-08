@@ -3,6 +3,7 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
 }
 
 (function () {
+    'use strict';
     /**
      * Creates test cases and adds them to the global testing array.
      *

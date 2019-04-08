@@ -31,8 +31,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     /**
      * Populates a collection with test data and creates a regular sparse index. This collection is
      * used for comparison testing against the same data set with a $** index. Along with
-     * 'fieldsToIndex', we also index a 'fieldName' + '_inc' field which is updated via $inc operator
-     * by the update operations.
+     * 'fieldsToIndex', we also index a 'fieldName' + '_inc' field which is updated via $inc
+     * operator by the update operations.
      */
     function getSetupFunctionForTargetedIndex(fieldsToIndex, documentGenerator, documentCount) {
         return function(collection) {
@@ -63,8 +63,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Creates 2 performance regression tests, one with a $** index and a second with a set of regular
-     * sparse indexes which cover the same the fields.
+     * Creates 2 performance regression tests, one with a $** index and a second with a set of
+     * regular sparse indexes which cover the same the fields.
      */
     function makeComparisonUpdateTest(
         name, fieldsToIndex, operationList, documentGenerator, documentCount) {
@@ -115,7 +115,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     /**
      * Creates a set of operations which will find a single document via array value (stored as the
      * first element of the array) and then increments the value stored in the second element. This
-     * is meant to exercise a "find document via multikey index and update an indexed value" use case.
+     * is meant to exercise a "find document via multikey index and update an indexed value" use
+     * case.
      */
     function makeArrayUpdateOperationList(fieldList) {
         var list = [];
@@ -131,9 +132,9 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Returns a function which will generate a document with an array value of size 'arraySize'. This
-     * array is populated with 'seed' which will be used as the query for the delete operation and 99
-     * values that are outside of the queryable range.
+     * Returns a function which will generate a document with an array value of size
+     * 'arraySize'. This array is populated with 'seed' which will be used as the query for the
+     * delete operation and 99 values that are outside of the queryable range.
      */
     function makeArrayValueDocumentGenerator(fieldList, arraySize) {
         return function(seed) {

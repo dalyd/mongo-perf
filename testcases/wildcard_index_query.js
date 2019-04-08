@@ -29,9 +29,9 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Returns a function that generates a document with the fields listed in 'fieldList'. The value for
-     * each field is an integer that is unique to a given document. If a field contains a dotted path,
-     * it will be expanded to its corresponding object.
+     * Returns a function that generates a document with the fields listed in 'fieldList'. The value
+     * for each field is an integer that is unique to a given document. If a field contains a dotted
+     * path, it will be expanded to its corresponding object.
      *
      * Examples:
      * Input: fieldList: ["abc", "def"], seed: 1
@@ -52,8 +52,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Returns a function that generates a document with the fields listed in 'fieldList'. The value for
-     * each field is an array of integers, each with a unique set of 'arraySize' numbers.
+     * Returns a function that generates a document with the fields listed in 'fieldList'. The value
+     * for each field is an array of integers, each with a unique set of 'arraySize' numbers.
      *
      * Example:
      * Input: fieldList: ["abc", "def"], arraySize: 4, seed: 0
@@ -77,9 +77,10 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Returns a function that generates a document with a single 'fieldList' field. The value for each
-     * field is an array of integers, each with 'arraySize' numbers. If 'fieldList' contains more than
-     * one field, this function will iterate over them, outputing a single field per output document.
+     * Returns a function that generates a document with a single 'fieldList' field. The value for
+     * each field is an array of integers, each with 'arraySize' numbers. If 'fieldList' contains
+     * more than one field, this function will iterate over them, outputing a single field per
+     * output document.
      *
      * Example 1:
      * Input: fieldList: ["abc", "def"], arraySize: 3, seed: 2
@@ -155,8 +156,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Creates 2 performance regression tests, one with a $** index and a second with a set of regular
-     * sparse indexes which cover the same the fields for comparison.
+     * Creates 2 performance regression tests, one with a $** index and a second with a set of
+     * regular sparse indexes which cover the same the fields for comparison.
      */
     function makeComparisonReadTest(
         name, fieldsToIndex, operationList, documentGenerator, documentCount) {
@@ -189,8 +190,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     }
 
     /**
-     * Returns a list of 2 predicate point query operations, each searching for 2 fields with a random
-     * value between 0 and 'maxValue'.
+     * Returns a list of 2 predicate point query operations, each searching for 2 fields with a
+     * random value between 0 and 'maxValue'.
      */
     function getTwoPointQueryList(fieldList, maxValue) {
         assert(fieldList.length === 2);
@@ -249,8 +250,8 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
     var fieldList = [];
 
     //
-    // Standalone test which perfoms a point query against a single multikey path, in a collection with
-    // 100 multikey paths.
+    // Standalone test which perfoms a point query against a single multikey path, in a collection
+    // with 100 multikey paths.
     //
 
     fieldList = getNFieldNames(100);

@@ -43,19 +43,18 @@ if ((typeof tests === "undefined" ? "undefined" : typeof(tests)) != "object") {
      */
     function getNextFieldNameIndexForNestedDocument(offset, currentDepth, n, skip) {
         /**
-         * Assuming that skip increases by one during each iteration, (n * (skip - 1)) is the "offset"
-         * (relative to (offset + i - skip) i.e. the last fieldName that was used in the path) of the
-         * last fieldName pulled in the previous iteration (where the path was the same). So we add one
-         * to this expression to get the index of the next fieldName.
+         * Assumqing that skip increases by one during each iteration, (n * (skip - 1)) is the
+         * "offset" (relative to (offset + i - skip) i.e. the last fieldName that was used in the
+         * path) of the last fieldName pulled in the previous iteration (where the path was the
+         * same). So we add one to this expression to get the index of the next fieldName.
          */
         return offset + (currentDepth - 1) * skip + n * (skip - 1) + 1;
     }
 
     /*
      * Inserts n values into object[fieldNamesArray[offset]][fieldNamesArray[offset +
-     * skip]]...[fieldNamesArray[offset + (maxDepth - 1) * skip]] (creating intermediate objects along
-     * the way).
-     * This function will overwrite intervening non-object values.
+     * skip]]...[fieldNamesArray[offset + (maxDepth - 1) * skip]] (creating intermediate objects
+     * along the way).  This function will overwrite intervening non-object values.
      */
     function addNNestedFieldsWithSkip(
         object, fieldNamesArray, offset, maxDepth, currentDepth, values, n, skip) {
